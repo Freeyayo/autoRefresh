@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap');
+*{
+	padding: 0;
+	margin: 0;
+}
+
+@mixin fontBasic($fz:30px,$left:50%,$top:20%,$transX:-50%,$transY:-50%){
+	position: absolute;
+	color: white;
+	font-family: 'Gloria Hallelujah', cursive;;
+	font-size: $fz;
+	left: $left;
+	top: $top;
+	transform:translate($transX,$transY);
+}
+
+@keyframes fadeInLeft{
+	0%{
+		opacity: 0;
+		left: 0%;
+	}
+	70%{
+		opacity: 0;
+		left: 48%;
+	}
+	100%{
+		opacity: 1;
+		left: 50%;
+	}
+}
+
+@keyframes blink{
+	0%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut{
+	0%{
+		opacity: 1;
+		display: block;
+	}
+	100%{
+		opacity: 0;
+		display: none;
+	}
+}
+
+@keyframes fadeIn{
+	0%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+
+#biocontainer{
+	background: black;
+	#title{
+		@include fontBasic;
+		// animation: fadeInLeft 1s 1 ease both;
+	}
+	#page1{
+		position: absolute;
+	    width: 100%;
+	    height: 100%;
+	    #bioLine1{
+			@include fontBasic(20px,48%,30%,-150%,-50%);
+			animation: fadeInLeft 1s 1 alternate ease both;
+		}
+		#bioLine2{
+			@include fontBasic(20px,48%,40%,-187%,-50%);
+			animation: fadeInLeft 1s .2s 1 alternate ease-out both;
+		}
+		#bioLine3{
+			@include fontBasic(20px,48%,50%,-187%,-50%);
+			animation: fadeInLeft 1s .4s 1 alternate ease-out both;
+		}
+		#bioLine4{
+			@include fontBasic(20px,48%,60%,-214%,-50%);
+			animation: fadeInLeft 1s .6s 1 alternate ease-out both;
+		}
+		#bioLine5{
+			@include fontBasic(20px,48%,70%,-82%,-50%);
+			animation: fadeInLeft 1s .8s 1 alternate ease-out both;
+		}
+		#bioAvatar{
+			position: absolute;
+		    left: 50%;
+		    top: 50%;
+		    transform: translate(55%,-52%) scale(.6);
+		}
+	}
+	#page2{
+		position: absolute;
+		display: none;
+	    width: 100%;
+	    height: 100%;
+	    #bio2Line1{
+			@include fontBasic(20px,48%,30%,-282%,-50%);
+			animation: fadeInLeft 1s 1 alternate ease both;
+		}
+		#bio2Line2{
+			@include fontBasic(20px,48%,40%,-37%,-50%);
+			animation: fadeInLeft 1s .2s 1 alternate ease-out both;
+		}
+		#bio2Line3{
+			@include fontBasic(20px,48%,50%,-36%,-50%);
+			animation: fadeInLeft 1s .4s 1 alternate ease-out both;
+		}
+		#bio2Line4{
+			@include fontBasic(20px,48%,60%,-38%,-50%);
+			animation: fadeInLeft 1s .6s 1 alternate ease-out both;
+		}
+		#bio2Line5{
+			@include fontBasic(20px,48%,70%,-36%,-50%);
+			animation: fadeInLeft 1s .8s 1 alternate ease-out both;
+		}
+		#bioAvatar2{
+			position: absolute;
+		    left: 50%;
+		    top: 50%;
+		    transform: translate(-132%,-52%) scale(.6);
+		}
+	}
+	#page3{
+		position: absolute;
+		display: none;
+	    width: 100%;
+	    height: 100%;
+	    #bio3Line1{
+			@include fontBasic(23px,48%,30%,-150%,-50%);
+			animation: fadeInLeft 1s 1 alternate ease both;
+			text-decoration: underline;
+		}
+		#bio3Line2{
+			@include fontBasic(20px,48%,40%,-82%,-50%);
+			color: #FFC107;
+			animation: fadeInLeft 1s .2s 1 alternate ease-out both;
+		}
+		#bio3Line3{
+			@include fontBasic(20px,48%,50%,-50%,-50%);
+			animation: fadeInLeft 1s .4s 1 alternate ease-out both;
+		}
+		#bio3Line4{
+			@include fontBasic(20px,48%,60%,-44%,-50%);
+			color: #E91E63;
+			animation: fadeInLeft 1s .6s 1 alternate ease-out both;
+		}
+		#bio3Line5{
+			@include fontBasic(20px,48%,70%,-61%,-50%);
+			animation: fadeInLeft 1s .8s 1 alternate ease-out both;
+		}
+	}
+	#page4{
+		position: absolute;
+		display: none;
+	    width: 100%;
+	    height: 100%;
+	    #bio4Line1{
+			@include fontBasic(20px,48%,30%,-258%,-50%);
+			animation: fadeInLeft 1s 1 alternate ease both;
+		}
+		#bio4Line2{
+			@include fontBasic(20px,48%,40%,-468%,-135%);
+			animation: fadeInLeft 1s .2s 1 alternate ease-out both;
+		}
+		#bio4Line3{
+			@include fontBasic(18px,48%,50%,-106%,-30%);
+			animation: fadeInLeft 1s .4s 1 alternate ease-out both;
+			a{
+				color: #2196F3;
+			}
+		}
+		#bio4Line4{
+			@include fontBasic(20px,48%,60%,20%,-527%);
+			animation: fadeInLeft 1s .6s 1 alternate ease-out both;
+		}
+		#bio4Line5{
+			@include fontBasic(18px,48%,70%,3%,-150%);
+			animation: fadeInLeft 1s .8s 1 alternate ease-out both;
+			border: 1px solid white;
+		    border-radius: 9px;
+		    padding: 9px;
+		}
+	}
+	#nextPage{
+		@include fontBasic(20px,75%,80%,-50%,-50%);
+		animation: blink 1s 2s infinite alternate ease both;
+		cursor: pointer;
+	}
+}
+
+.fadeOut{
+	animation: fadeOut 1s 0s 1 alternate ease both;
+}
+
+.fadeIn{
+	animation: fadeIn 1s 0s 1 alternate ease both;
+}
+
+.variable{
+	color: #ff9800;
+}
+
+.variableName{
+	color: #ffc107;
+}
+
+.equal{
+	color: red;
+}
+
+.string{
+	color: gray;
+}

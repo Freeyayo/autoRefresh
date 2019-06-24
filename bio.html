@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="biocontainer">
+		<div id="title">Career  &   Projects</div>
+		<div id="page1">
+			<div id="bioLine1">
+				<span class="variable">const</span> <span class="variableName">Name</span> <span class="equal">=</span> " <span class="string">Conghao Cai</span> 👼";
+			</div>
+			<div id="bioLine2">
+				<span class="variable">const</span> <span class="variableName">Birth</span> <span class="equal">=</span> " <span class="string">May 6th</span> ";
+			</div>
+			<div id="bioLine3">
+				<span class="variable">const</span> <span class="variableName">Height</span> <span class="equal">=</span> " <span class="string">178 cm</span> ";
+			</div>
+			<div id="bioLine4">
+				<span class="variable">let</span> <span class="variableName">Weight</span> <span class="equal">=</span> " <span class="string">65 kg</span> ";
+			</div>
+			<div id="bioLine5">
+				<span class="variable">const</span> <span class="variableName">Hobbies</span> <span class="equal">=</span> ["<span class="string">Soccer</span>","<span class="string">Games</span>","<span class="string">Old Films</span>","<span class="string">New Things</span>"];
+			</div>
+			<div id="bioAvatar">
+				<img src="bioavatar.png">
+			</div>
+		</div>
+
+		<div id="page2">
+			<div id="bio2Line1">
+			
+			</div>
+			<div id="bio2Line2">
+				<span class="variableName">成都亚林古建筑设计公司</span> 旅游策划部 <span class="variableName">官网开发</span> 2016.1 - 2017.10
+			</div>
+			<div id="bio2Line3">
+				<span class="variableName">博谊商贸有限公司</span> 前端开发技术部门 <span class="variableName">实习前端开发</span> 2017.12 - 2018.3
+			</div>
+			<div id="bio2Line4">
+				<span class="variableName">北京指尖灵动广告有限公司</span> 前端部门 <span class="variableName">前端开发</span> 2018.4 - 2018.9
+			</div>
+			<div id="bio2Line5">
+				<span class="variableName">北京指尖灵动广告有限公司</span> 技术事业部 <span class="variableName">前端开发工程师</span> 2018.10 - 2019.4
+			</div>
+			<div id="bioAvatar2">
+				<img src="bioavatar2.png">
+			</div>
+		</div>
+
+		<div id="page3">
+			<div id="bio3Line1">
+			What can I do ?
+			</div>
+			<div id="bio3Line2">
+				Modern JavaScript , TypeScript 
+			</div>
+			<div id="bio3Line3">
+				React , ReactNative , Vue , MiniProgram , Electron 
+			</div>
+			<div id="bio3Line4">
+				Jquery , Webpack , Git , ThreeJs , PixiJs , Redux , WebSocket 
+			</div>
+			<div id="bio3Line5">
+				NodeJs , EJS , MongoDB , PHP , Python , c++ 
+			</div>
+		</div>
+
+		<div id="page4">
+			<div id="bio4Line1">
+			Some projects 
+			</div>
+			<div id="bio4Line2">
+				Mobile :
+			</div>
+			<div id="bio4Line3">
+				 <a href="http://h5.flyfinger.com/2018/dm/live/index.html">Damai Music Festival</a><br>
+				 <a href="http://h5.flyfinger.com/2018/huayi/intern/index.html">Huayi Intern</a><br>
+				 <a href="http://h5.flyfinger.com/2018/360/llq10year/index.html">360 Ten Years</a><br>
+				 <a href="http://h5.dodoh5.com.cn/marshall/poster/index.html">Marshall</a><br>
+				 <a href="http://h5.flyfinger.com/2018/zj/mm1/index.html">Flyfinger Music & Movie</a><br>
+				 <a href="http://h5.flyfinger.com/2018/carabao/poster/index.html">Carabao World Cup</a><br>
+				 <a href="http://h5.flyfinger.com/2018/360/check/index.html">360 Brain</a><br>
+				 <a href="https://h5.flyfinger.com/2019/yg/invitation/index.html">ShangHai Yiguo Invitation</a>
+				 <br>
+				 <a href="http://h5.flyfinger.com/2019/baidu/ad/index.html">Spring Rain</a>
+			</div>
+			<div id="bio4Line4">
+				Desktop :
+			</div>
+			<div id="bio4Line5">
+				国家质检总局："http://101.37.148.184/"
+				<br>
+				指尖灵动立项单系统
+				<br>
+				个人网站："http://119.23.244.156:39111/home"
+				<br>
+				丽柏女神网站："http://www.ladylibertybrands.com.cn/"
+
+			</div>
+		</div>
+
+		<div id="nextPage">
+				next ->
+		</div>
+		<canvas></canvas>
+	</div>
+	<script type="text/javascript">
+		let page = 1;
+		const next = document.querySelector("#nextPage");
+		next.addEventListener("click",nextHandler,false);
+
+		function nextHandler(){
+			if(page === 3){
+				next.innerHTML = "review ... ";
+			}else{
+				next.innerHTML = "next ->";
+			}
+			document.querySelector(`#page${page}`).style.display = "none";
+
+			if(page < 4){
+				document.querySelector(`#page${page+1}`).style.display = "block";
+				document.querySelector(`#page${page+1}`).setAttribute("class","fadeIn");
+				page++;
+			}else{
+				page = 1;
+				document.querySelector(`#page${page}`).style.display = "block";
+				document.querySelector(`#page${page}`).setAttribute("class","fadeIn");
+			}
+		}
+	</script>
+	<script src="build.js"></script>
+</body>
+</html>
