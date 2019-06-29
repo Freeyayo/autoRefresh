@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
-     entry:'./js/effect.js',
+     entry:'./js/effect.ts',
      output:{
           path:__dirname, 
           filename:'build.js' 
@@ -10,6 +10,11 @@ module.exports = {
      watch: true,
      module: {
         rules: [
+          {
+            test: /\.tsx?$/,
+            use: 'ts-loader',
+            exclude: /node_modules/
+          },
           {
             test: /\.scss$/,
             loader: "style-loader!css-loader!sass-loader"
@@ -25,6 +30,9 @@ module.exports = {
             }
           }
         ]
+     },
+     resolve: {
+       extensions: [ '.tsx', '.ts', '.js' ]
      },
      devtool: "source-map",
       plugins: [
