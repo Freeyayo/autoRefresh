@@ -4,12 +4,6 @@ interface dataInterface{
 	[properName: string]: string
 }
 
-interface timeInterface{
-	[properName: string]: number
-}
-
-let Time: number = 0;
-
 const Quene: string[] = [];
 const Color: dataInterface = {};
 
@@ -127,64 +121,18 @@ function generateRoutes(v: string, callback: Function){
 	})
 }
 
-function DFS(): object{		//do some initial jobs and return the result
-	initialColor();
-	const predecessor: dataInterface = {};
-	const finished: timeInterface = {};
-	const discovery: timeInterface = {};
-
-	Vertices.forEach((item: string, index: number): void => {
-		predecessor[item] = null;
-		finished[item] = 0;
-		discovery[item] = 0;
-	})
-
-	Vertices.forEach((item: string): void => {
-		if(Color[item] === "white"){
-			DFSVisit(item, Color, predecessor, finished, discovery);	//real DFS mapping here
-		}
-	})
-
-	return {
-		predecessor,
-		finished,
-		discovery
-	}
-}
-
-function DFSVisit(vertice:string, Color: dataInterface, predecessor: dataInterface, finished: timeInterface, discovery: timeInterface): void{
-	console.log(`${vertice} is discovered`);
-	Color[vertice] = "grey";
-	discovery[vertice] = Time++;
-	let neighbors: Array<string> = AdjList.get(vertice);
-
-	neighbors.forEach((item: string): void => {
-		if(Color[item] === "white"){
-			predecessor[item] = vertice;
-			DFSVisit(item, Color, predecessor, finished, discovery);	//run like stack 
-		}
-	})
-
-	finished[vertice] = Time++;
-	Color[vertice] = "black";
-	console.log(`explored ${vertice}`);
-
-}
-
-console.log(DFS())
-
 // BFS(Vertices[1],function(vertice: string){
 // 	console.log(vertice)
 // })
 
-// BFSForRoute(Vertices[0],function(result: object){
-// 	console.log(result)
-// })
+BFSForRoute(Vertices[0],function(result: object){
+	console.log(result)
+})
 
 
-// generateRoutes(Vertices[0],function(route){
-// 	console.log(route.reverse().join(" -> "));
-// })
+generateRoutes(Vertices[0],function(route){
+	console.log(route.reverse().join(" -> "));
+})
 
 
 

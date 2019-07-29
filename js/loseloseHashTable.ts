@@ -74,14 +74,14 @@ const Linklist: LinklistInterface = {
 		let current = this.head;
 		if(current.element === element){
 			current.element = null;
-			length --;
+			this.length --;
 			return true;
 		}else{
 			while(current.next){
 				current = current.next;
 				if(current.element === element){
 					current.element = null;
-					length --;
+					this.length --;
 					return true;
 				}
 			}
