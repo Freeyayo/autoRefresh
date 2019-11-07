@@ -1,203 +1,26 @@
-import "../css/style.scss";
+import '../css/style.scss';
+function format(node:HTMLElement, text: string, limit: number): void{
 
-interface dataInterface{
-	[properName: string]: string
-}
+	let isShown:boolean = false;
+	const fullText = text;
+	const limitedText = limit < text.length ? `${text.slice(0,limit)}...` : fullText;
 
-interface timeInterface{
-	[properName: string]: number
-}
+	node.innerHTML = `<div id='format_content'></div><a href='#' id='format_link'></a>`;
 
-let Time: number = 0;
+	const content = <HTMLElement>document.querySelector('#format_content');
+	const link = <HTMLElement>document.querySelector('#format_link');
 
-const Quene: string[] = [];
-const Color: dataInterface = {};
+	content.innerText = limitedText;
+	link.innerText = limit < text.length ? 'show' : '';
 
-const Vertices = ["A","B","C","D","E","F","G","H","I"];
-const AdjList = new Map();
-
-for(let i = 0; i < Vertices.length; i++){
-	addVertex(Vertices[i]);
-}
-
-addEdges("A", "B");
-addEdges("A", "C");
-addEdges("A", "D");
-addEdges("C", "D");
-addEdges("C", "G");
-addEdges("D", "G");
-addEdges("D", "H");
-addEdges("B", "E");
-addEdges("B", "F");
-addEdges("E", "I");
-
-function addEdges(v: string, w: string): void{
-	AdjList.get(v).push(w);
-	AdjList.get(w).push(v);
-}
-
-function addVertex(v: string): void{
-	AdjList.set(v, []);
-}
-
-function toString(): string {
-	let s: string = "";
-	Vertices.forEach((item: string, index: number) => {
-		s += `${item} -> ${AdjList.get(item)}\n`; 
-	})
-	return s;
-}
-
-function initialColor(): void{
-	Vertices.forEach((item: string) => {
-		Color[item] = "white";
-	})
-}
-
-function BFS(v: string, callback: Function): void{
-	initialColor();
-	Quene.push(v);
-	while(Quene.length){
-		let vertice = Quene.shift();
-		Color[vertice] = "grey";
-		let neighbour = AdjList.get(vertice);
-		if(neighbour.length){
-			neighbour.forEach((item: string) => {
-				if(Color[item] === "white"){
-					Color[item] = "grey";
-					Quene.push(item);
-				}
-			})
-		}
-		Color[vertice] = "black";
-		if(callback){
-			callback(vertice);
-		}
-	}
-}
-
-function BFSForRoute(v: string, callback: Function): string | void{
-	initialColor();
-	const preVertice = new Map();
-	const distance = new Map();
-
-	for(let i = 0 ; i < Vertices.length; i++){
-		distance.set(Vertices[i], 0);
-		preVertice.set(Vertices[i], null);
+	const displayHandler = ():void => {
+		content.innerText = isShown ? limitedText : fullText;
+		link.innerText = isShown ? 'show' : 'hide';
+		isShown = !isShown;
 	}
 
-	Quene.push(v);
-	while(Quene.length){
-		let vertice = Quene.shift();	//shifting out vertice in Quene
-		Color[vertice] = "grey";
-		let neighbour = AdjList.get(vertice);
-		if(neighbour.length){
-			neighbour.forEach((item: string) => {
-				if(Color[item] === "white"){
-					distance.set(item, distance.get(vertice) + 1);	//mark the vertice
-					preVertice.set(item, vertice);	//VERTICE is the previous one of every neighbour
-					Color[item] = "grey";
-					Quene.push(item);	//push all of the white vertices which can be found in a turn of loop
-				}
-			})
-		}
-		Color[vertice] = "black";
-	}
-	if(callback){
-		callback({preVertice, distance});
-	}
-}
-
-function generateRoutes(v: string, callback: Function){
-	let fromVertice = v;
-	let subQuene = Vertices.filter((item: string) => {
-		return item !== fromVertice;
-	})
-	subQuene.forEach((item: string) => {
-		let toVertice = item;
-		let route = [];
-		for(let v = toVertice; v !== null; BFSForRoute(fromVertice, function(result){
-			v = result.preVertice.get(v);	//get previous vertice of v, then v equals to that, until v=null 
-		})){
-			route.push(v);
-		}
-		if(callback){
-			callback(route)
-		}
-	})
-}
-
-function DFS(): object{		//do some initial jobs and return the result
-	initialColor();
-	const predecessor: dataInterface = {};
-	const finished: timeInterface = {};
-	const discovery: timeInterface = {};
-
-	Vertices.forEach((item: string, index: number): void => {
-		predecessor[item] = null;
-		finished[item] = 0;
-		discovery[item] = 0;
-	})
-
-	Vertices.forEach((item: string): void => {
-		if(Color[item] === "white"){
-			DFSVisit(item, Color, predecessor, finished, discovery);	//real DFS mapping here
-		}
-	})
-
-	return {
-		predecessor,
-		finished,
-		discovery
-	}
-}
-
-function DFSVisit(vertice:string, Color: dataInterface, predecessor: dataInterface, finished: timeInterface, discovery: timeInterface): void{
-	console.log(`${vertice} is discovered`);
-	Color[vertice] = "grey";
-	discovery[vertice] = Time++;
-	let neighbors: Array<string> = AdjList.get(vertice);
-
-	neighbors.forEach((item: string): void => {
-		if(Color[item] === "white"){
-			predecessor[item] = vertice;
-			DFSVisit(item, Color, predecessor, finished, discovery);	//run like stack 
-		}
-	})
-
-	finished[vertice] = Time++;
-	Color[vertice] = "black";
-	console.log(`explored ${vertice}`);
+	link.addEventListener('click',displayHandler,false)
 
 }
 
-console.log(DFS())
-
-// BFS(Vertices[1],function(vertice: string){
-// 	console.log(vertice)
-// })
-
-// BFSForRoute(Vertices[0],function(result: object){
-// 	console.log(result)
-// })
-
-
-// generateRoutes(Vertices[0],function(route){
-// 	console.log(route.reverse().join(" -> "));
-// })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+format(document.querySelector('#content'),'asdjkdfjkhdfdczxczxczxczxczxczxcxzcxczczas结束',16);
